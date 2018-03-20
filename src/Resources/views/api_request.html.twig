@@ -1,0 +1,19 @@
+{% extends layout ?: "@PayumCore/layout.html.twig" %}
+
+{% block payum_body %}
+    <p id="message" style="text-align:center;padding-top:50px;display:none;">
+        Vous allez être redirigé vers le site de la banque&hellip;
+    </p>
+    <form action="{{ action|raw }}" method="{{ method }}" name="CMCICFormulaire" id="CMCICFormulaire">
+        {% for name, value in fields -%}
+        <input type="hidden" name="{{ name }}" value="{{ value|raw }}">
+        {%- endfor %}
+        <noscript>
+            <button id="submit" type="submit" value="Continuer vers le site de la banque"></button>
+        </noscript>
+        <script type="application/javascript">
+            document.getElementById('message').style.display = 'block';
+            document.getElementById('submit').click();
+        </script>
+    </form>
+{% endblock %}

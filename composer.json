@@ -1,0 +1,35 @@
+{
+    "name" : "ekyna/payum-cybermut",
+    "description" : "Payum Cybermut (Credit Mutuel/CIC) gateway",
+    "type" : "component",
+    "authors" : [
+        {
+            "name" : "Etienne Dauvergne",
+            "homepage" : "http://ekyna.com"
+        }
+    ],
+    "keywords": [
+        "php",
+        "payum",
+        "cybermut",
+        "credit mutuel",
+        "cic"
+    ],
+    "homepage" : "https://github.com/ekyna/PayumCybermut",
+    "license" : "MIT",
+    "require" : {
+        "php" : ">=7.0",
+        "payum/core": "~1.4.0",
+        "psr/log": "~1.0",
+        "symfony/options-resolver": "~3.0"
+    },
+    "require-dev": {
+        "php-http/guzzle6-adapter": "^1.1",
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload" : {
+        "psr-4" : {
+            "Ekyna\\Component\\Payum\\Cybermut\\" : "src/"
+        }
+    }
+}
