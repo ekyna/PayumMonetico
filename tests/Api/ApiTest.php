@@ -1,13 +1,13 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Api;
+namespace Ekyna\Component\Payum\Monetico\Api;
 
-use Ekyna\Component\Payum\Cybermut\TestCase;
+use Ekyna\Component\Payum\Monetico\TestCase;
 use Payum\Core\Exception\InvalidArgumentException;
 
 /**
  * Class ApiTest
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class ApiTest extends TestCase

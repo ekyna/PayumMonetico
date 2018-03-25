@@ -1,8 +1,8 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action\Api;
+namespace Ekyna\Component\Payum\Monetico\Action\Api;
 
-use Ekyna\Component\Payum\Cybermut\Api\Api;
+use Ekyna\Component\Payum\Monetico\Api\Api;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\ApiAwareInterface;
 use Payum\Core\Exception\UnsupportedApiException;
@@ -13,7 +13,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Class AbstractApiAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterface, ApiAwareInterface, LoggerAwareInterface

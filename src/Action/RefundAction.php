@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action;
+namespace Ekyna\Component\Payum\Monetico\Action;
 
 use Ekyna\Component\Commerce\Bridge\Payum\Request\GetHumanStatus;
 use Payum\Core\Action\ActionInterface;
@@ -12,7 +12,7 @@ use Payum\Core\Request\Refund;
 
 /**
  * Class CaptureAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class RefundAction implements ActionInterface, GatewayAwareInterface

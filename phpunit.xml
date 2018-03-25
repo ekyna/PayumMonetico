@@ -6,7 +6,7 @@
          bootstrap="tests/bootstrap.php">
 
     <testsuites>
-        <testsuite name="Ekyna Payum Cybermut Component Test Suite">
+        <testsuite name="Ekyna Payum Monetico Component Test Suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>

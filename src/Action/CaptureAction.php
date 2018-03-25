@@ -1,8 +1,8 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action;
+namespace Ekyna\Component\Payum\Monetico\Action;
 
-use Ekyna\Component\Payum\Cybermut\Request\PaymentForm;
+use Ekyna\Component\Payum\Monetico\Request\PaymentForm;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
@@ -13,7 +13,7 @@ use Payum\Core\Request\Sync;
 
 /**
  * Class CaptureAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class CaptureAction implements ActionInterface, GatewayAwareInterface

@@ -1,14 +1,14 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action\Api;
+namespace Ekyna\Component\Payum\Monetico\Action\Api;
 
-use Ekyna\Component\Payum\Cybermut\Request\PaymentResponse;
+use Ekyna\Component\Payum\Monetico\Request\PaymentResponse;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHttpRequest;
 /**
  * Class PaymentResponseAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class PaymentResponseAction extends AbstractApiAction
@@ -55,7 +55,7 @@ class PaymentResponseAction extends AbstractApiAction
      */
     private function logResponseData(array $data)
     {
-        $this->logData("[Cybermut] Response", $data, [
+        $this->logData("[Monetico] Response", $data, [
             'tpe',
             'date',
             'montant',

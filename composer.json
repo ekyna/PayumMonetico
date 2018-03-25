@@ -1,6 +1,6 @@
 {
-    "name" : "ekyna/payum-cybermut",
-    "description" : "Payum Cybermut (Credit Mutuel/CIC) gateway",
+    "name" : "ekyna/payum-monetico",
+    "description" : "Payum Monetico (Credit Mutuel/CIC) gateway",
     "type" : "component",
     "authors" : [
         {
@@ -11,11 +11,11 @@
     "keywords": [
         "php",
         "payum",
-        "cybermut",
+        "monetico",
         "credit mutuel",
         "cic"
     ],
-    "homepage" : "https://github.com/ekyna/PayumCybermut",
+    "homepage" : "https://github.com/ekyna/PayumMonetico",
     "license" : "MIT",
     "require" : {
         "php" : ">=7.0",
@@ -29,7 +29,7 @@
     },
     "autoload" : {
         "psr-4" : {
-            "Ekyna\\Component\\Payum\\Cybermut\\" : "src/"
+            "Ekyna\\Component\\Payum\\Monetico\\" : "src/"
         }
     }
 }

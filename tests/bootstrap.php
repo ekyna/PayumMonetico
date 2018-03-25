@@ -10,4 +10,4 @@ EOM;
     exit(1);
 }
 
-$loader->addPsr4('Ekyna\\Component\\Payum\\Cybermut\\', __DIR__);
+$loader->addPsr4('Ekyna\\Component\\Payum\\Monetico\\', __DIR__);

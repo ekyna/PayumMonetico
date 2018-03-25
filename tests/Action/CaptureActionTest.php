@@ -1,15 +1,15 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action;
+namespace Ekyna\Component\Payum\Monetico\Action;
 
-use Ekyna\Component\Payum\Cybermut\Request\PaymentForm;
+use Ekyna\Component\Payum\Monetico\Request\PaymentForm;
 use Payum\Core\Model\Token;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Sync;
 
 /**
  * Class CaptureActionTest
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class CaptureActionTest extends AbstractActionTest

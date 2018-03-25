@@ -1,6 +1,6 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Api;
+namespace Ekyna\Component\Payum\Monetico\Api;
 
 use Payum\Core\Exception\InvalidArgumentException;
 use Payum\Core\Exception\LogicException;
@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Api
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class Api

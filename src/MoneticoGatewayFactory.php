@@ -1,17 +1,17 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut;
+namespace Ekyna\Component\Payum\Monetico;
 
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\GatewayFactory;
 use Payum\Core\GatewayFactoryInterface;
 
 /**
- * Class CybermutGatewayFactory
- * @package Ekyna\Component\Payum\Cybermut
+ * Class MoneticoGatewayFactory
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
-class CybermutGatewayFactory extends GatewayFactory
+class MoneticoGatewayFactory extends GatewayFactory
 {
     /**
      * Builds a new factory.
@@ -19,7 +19,7 @@ class CybermutGatewayFactory extends GatewayFactory
      * @param array                   $defaultConfig
      * @param GatewayFactoryInterface $coreGatewayFactory
      *
-     * @return CybermutGatewayFactory
+     * @return MoneticoGatewayFactory
      */
     public static function build(array $defaultConfig, GatewayFactoryInterface $coreGatewayFactory = null)
     {
@@ -32,10 +32,10 @@ class CybermutGatewayFactory extends GatewayFactory
     protected function populateConfig(ArrayObject $config)
     {
         $config->defaults([
-            'payum.factory_name'  => 'cybermut',
-            'payum.factory_title' => 'Cybermut',
+            'payum.factory_name'  => 'monetico',
+            'payum.factory_title' => 'Monetico',
 
-            'payum.template.api_request' => '@EkynaPayumCybermut/api_request.html.twig',
+            'payum.template.api_request' => '@EkynaPayumMonetico/api_request.html.twig',
 
             'payum.action.capture'         => new Action\CaptureAction(),
             'payum.action.convert_payment' => new Action\ConvertPaymentAction(),
@@ -81,7 +81,7 @@ class CybermutGatewayFactory extends GatewayFactory
         }
 
         $config['payum.paths'] = array_replace([
-            'EkynaPayumCybermut' => __DIR__.'/Resources/views',
+            'EkynaPayumMonetico' => __DIR__.'/Resources/views',
         ], $config['payum.paths'] ?: []);
     }
 }

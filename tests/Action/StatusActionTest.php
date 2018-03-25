@@ -1,12 +1,12 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action;
+namespace Ekyna\Component\Payum\Monetico\Action;
 
 use Payum\Core\Request\GetHumanStatus;
 
 /**
  * Class StatusActionTest
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class StatusActionTest extends AbstractActionTest

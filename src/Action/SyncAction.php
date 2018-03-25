@@ -1,8 +1,8 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action;
+namespace Ekyna\Component\Payum\Monetico\Action;
 
-use Ekyna\Component\Payum\Cybermut\Request\PaymentResponse;
+use Ekyna\Component\Payum\Monetico\Request\PaymentResponse;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\GatewayAwareInterface;
@@ -11,7 +11,7 @@ use Payum\Core\Request\Sync;
 
 /**
  * Class SyncAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class SyncAction implements ActionInterface, GatewayAwareInterface

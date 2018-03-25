@@ -1,8 +1,8 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action\Api;
+namespace Ekyna\Component\Payum\Monetico\Action\Api;
 
-use Ekyna\Component\Payum\Cybermut\Request\PaymentForm;
+use Ekyna\Component\Payum\Monetico\Request\PaymentForm;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Reply\HttpResponse;
@@ -10,7 +10,7 @@ use Payum\Core\Request\RenderTemplate;
 
 /**
  * Class PaymentFormAction
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class PaymentFormAction extends AbstractApiAction
@@ -67,7 +67,7 @@ class PaymentFormAction extends AbstractApiAction
      */
     private function logRequestData(array $data)
     {
-        $this->logData("[Cybermut] Request", $data, [
+        $this->logData("[Monetico] Request", $data, [
             'trans_id',
             'reference',
             'amount',

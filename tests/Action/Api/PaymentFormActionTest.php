@@ -1,15 +1,15 @@
 <?php
 
-namespace Ekyna\Component\Payum\Cybermut\Action\Api;
+namespace Ekyna\Component\Payum\Monetico\Action\Api;
 
-use Ekyna\Component\Payum\Cybermut\Action\AbstractActionTest;
-use Ekyna\Component\Payum\Cybermut\Request\PaymentForm;
+use Ekyna\Component\Payum\Monetico\Action\AbstractActionTest;
+use Ekyna\Component\Payum\Monetico\Request\PaymentForm;
 use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Request\RenderTemplate;
 
 /**
  * Class PaymentFormActionTest
- * @package Ekyna\Component\Payum\Cybermut
+ * @package Ekyna\Component\Payum\Monetico
  * @author  Etienne Dauvergne <contact@ekyna.com>
  */
 class PaymentFormActionTest extends AbstractActionTest
