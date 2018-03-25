@@ -54,7 +54,6 @@ class CybermutGatewayFactoryTest extends TestCase
             'tpe'       => '123456',
             'key'       => '123456',
             'company'   => 'foobar',
-            'directory' => sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'EkynaPayumCybermut',
         ]);
 
         $this->assertInstanceOf('Payum\Core\Gateway', $gateway);
@@ -112,10 +111,31 @@ class CybermutGatewayFactoryTest extends TestCase
     public function test_throw_if_required_options_not_passed()
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('The tpe, key, company, directory fields are required.');
+        $this->expectExceptionMessage('The bank, mode, tpe, key, company fields are required.');
 
         $factory = new CybermutGatewayFactory();
 
         $factory->create();
+    }
+
+    public function test_configure_paths()
+    {
+        $factory = new CybermutGatewayFactory();
+
+        $config = $factory->createConfig();
+
+        $this->assertInternalType('array', $config);
+        $this->assertNotEmpty($config);
+
+        $this->assertInternalType('array', $config['payum.paths']);
+        $this->assertNotEmpty($config['payum.paths']);
+
+        $this->assertArrayHasKey('PayumCore', $config['payum.paths']);
+        $this->assertStringEndsWith('Resources/views', $config['payum.paths']['PayumCore']);
+        $this->assertTrue(file_exists($config['payum.paths']['PayumCore']));
+
+        $this->assertArrayHasKey('EkynaPayumCybermut', $config['payum.paths']);
+        $this->assertStringEndsWith('Resources/views', $config['payum.paths']['EkynaPayumCybermut']);
+        $this->assertTrue(file_exists($config['payum.paths']['EkynaPayumCybermut']));
     }
 }

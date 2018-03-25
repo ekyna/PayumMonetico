@@ -32,13 +32,6 @@ class CybermutGatewayFactory extends GatewayFactory
     protected function populateConfig(ArrayObject $config)
     {
         $config->defaults([
-            'bank'      => null,
-            'mode'      => null,
-            'tpe'       => null,
-            'key'       => null,
-            'company'   => null,
-            'debug'     => false,
-
             'payum.factory_name'  => 'cybermut',
             'payum.factory_title' => 'Cybermut',
 
@@ -50,13 +43,27 @@ class CybermutGatewayFactory extends GatewayFactory
             'payum.action.refund'          => new Action\RefundAction(),
             'payum.action.status'          => new Action\StatusAction(),
 
-            'payum.action.api.response' => new Action\Api\PaymentResponseAction(),
-            'payum.action.api.request'  => function (ArrayObject $config) {
+            'payum.action.api.payment_response' => new Action\Api\PaymentResponseAction(),
+            'payum.action.api.payment_form'  => function (ArrayObject $config) {
                 return new Action\Api\PaymentFormAction($config['payum.template.api_request']);
             },
+        ]);
 
-            'payum.api' => function (ArrayObject $config) {
-                $config->validateNotEmpty(['tpe', 'key', 'company', 'directory']);
+        if (false == $config['payum.api']) {
+            $config['payum.default_options'] = array(
+                'bank'      => null,
+                'mode'      => null,
+                'tpe'       => null,
+                'key'       => null,
+                'company'   => null,
+                'debug'     => false,
+            );
+
+            $config->defaults($config['payum.default_options']);
+            $config['payum.required_options'] = ['bank', 'mode', 'tpe', 'key', 'company'];
+
+            $config['payum.api'] = function (ArrayObject $config) {
+                $config->validateNotEmpty($config['payum.required_options']);
 
                 $api = new Api\Api();
 
@@ -70,7 +77,11 @@ class CybermutGatewayFactory extends GatewayFactory
                 ]);
 
                 return $api;
-            },
-        ]);
+            };
+        }
+
+        $config['payum.paths'] = array_replace([
+            'EkynaPayumCybermut' => __DIR__.'/Resources/views',
+        ], $config['payum.paths'] ?: []);
     }
 }
