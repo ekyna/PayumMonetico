@@ -44,8 +44,12 @@ class PaymentResponseAction extends AbstractApiAction
         if ($this->api->checkPaymentResponse($data)) {
             // Update the payment details
             $model->replace($data); // TODO do not store all data
-            $request->setModel($model);
+            $model['valid_mac'] = 1;
+        } else {
+            $model['valid_mac'] = 0;
         }
+
+        $request->setModel($model);
     }
 
     /**
@@ -56,6 +60,7 @@ class PaymentResponseAction extends AbstractApiAction
     private function logResponseData(array $data)
     {
         $this->logData("[Monetico] Response", $data, [
+            'MAC',
             'tpe',
             'date',
             'montant',
