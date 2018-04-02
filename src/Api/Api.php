@@ -89,7 +89,7 @@ class Api
             'date'        => $data['date'],
             'montant'     => $data['amount'] . $data['currency'],
             'reference'   => $data['reference'],
-            'texte-libre' => $this->htmlEncode($data['comment']),
+            'texte-libre' => $data['comment'],
             'version'     => static::VERSION,
             'lgue'        => $data['locale'],
             'societe'     => $this->config['company'],
@@ -97,6 +97,8 @@ class Api
         ];
 
         $macData = array_values($fields);
+
+        $fields['texte-libre'] = $this->htmlEncode($data['comment']);
 
         if (!empty($data['schedule'])) {
             $macData[] = $fields['nbrech'] = count($data['schedule']);
@@ -191,7 +193,7 @@ class Api
             null,
         ];
 
-        return $data['MAC'] === $this->computeMac($macData);
+        return strtolower($data['MAC']) === $this->computeMac($macData);
     }
 
     /**

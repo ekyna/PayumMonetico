@@ -51,9 +51,7 @@ class PaymentFormAction extends AbstractApiAction
 
         $form = $this->api->createPaymentForm($data);
 
-        $renderTemplate = new RenderTemplate($this->templateName, [
-            'form' => $form,
-        ]);
+        $renderTemplate = new RenderTemplate($this->templateName, $form);
 
         $this->gateway->execute($renderTemplate);
 

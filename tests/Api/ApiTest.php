@@ -84,7 +84,7 @@ class ApiTest extends TestCase
                 'lgue'           => 'FR',
                 'societe'        => 'foobar',
                 'mail'           => 'test@example.org',
-                'MAC'            => '7da4821b50e5971be44993fdbee2b7696469948f',
+                'MAC'            => 'e13096f4559dd4a2c2f581d44bef6cd482ddefa0',
                 'url_retour'     => 'http://example.org',
                 'url_retour_ok'  => 'http://example.org',
                 'url_retour_err' => 'http://example.org',

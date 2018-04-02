@@ -43,7 +43,8 @@ class PaymentFormActionTest extends AbstractActionTest
         $apiMock
             ->expects($this->at(0))
             ->method('createPaymentForm')
-            ->with($this->isType('array'));
+            ->with($this->isType('array'))
+            ->willReturn([]);
 
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
