@@ -39,8 +39,20 @@ class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface
         }
         if (false == $model['amount']) {
             $this->gateway->execute($currency = new GetCurrency($payment->getCurrencyCode()));
+            $amount = (string)$payment->getTotalAmount();
 
-            $model['amount'] = (string)round($payment->getTotalAmount(), $currency->exp);
+            if (0 < $currency->exp) {
+                $divisor = pow(10, $currency->exp);
+
+                $amount = (string)round($amount / $divisor, $currency->exp);
+                if (false !== $pos = strpos($amount, '.')) {
+                    $amount = str_pad($amount, $pos + 1 + $currency->exp, '0', STR_PAD_RIGHT);
+                } else {
+                    $amount .= '.' . str_pad('0', $currency->exp, '0', STR_PAD_RIGHT);
+                }
+            }
+
+            $model['amount'] = $amount;
             $model['currency'] = (string)strtoupper($currency->code);
         }
         if (false == $model['email']) {
