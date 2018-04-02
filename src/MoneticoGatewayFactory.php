@@ -39,9 +39,10 @@ class MoneticoGatewayFactory extends GatewayFactory
 
             'payum.action.capture'         => new Action\CaptureAction(),
             'payum.action.convert_payment' => new Action\ConvertPaymentAction(),
-            'payum.action.sync'            => new Action\SyncAction(),
+            'payum.action.notify'          => new Action\NotifyAction(),
             'payum.action.refund'          => new Action\RefundAction(),
             'payum.action.status'          => new Action\StatusAction(),
+            'payum.action.sync'            => new Action\SyncAction(),
 
             'payum.action.api.payment_response' => new Action\Api\PaymentResponseAction(),
             'payum.action.api.payment_form'  => function (ArrayObject $config) {
