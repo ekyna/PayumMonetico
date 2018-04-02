@@ -90,7 +90,7 @@ class PaymentResponseActionTest extends AbstractActionTest
             ->with($this->isInstanceOf(GetHttpRequest::class))
             ->will($this->returnCallback(function (GetHttpRequest $request) {
                 $request->query['code-retour'] = 'payment';
-                $request->query['montant'] = 1;
+                $request->query['montant'] = '12.34EUR';
             }));
 
         $apiMock = $this->createApiMock();
@@ -104,7 +104,7 @@ class PaymentResponseActionTest extends AbstractActionTest
         $action->setApi($apiMock);
 
         $request = new PaymentResponse([]);
-        $request->setModel(['amount' => 1]);
+        $request->setModel(['amount' => '12.34', 'currency' => 'EUR']);
 
         $action->execute($request);
     }

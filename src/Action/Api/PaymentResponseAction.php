@@ -36,7 +36,7 @@ class PaymentResponseAction extends AbstractApiAction
         $this->logResponseData($data);
 
         // Check amount
-        if ($model['amount'] != $data['montant']) {
+        if ($model['amount'] . $model['currency'] != $data['montant']) {
             return;
         }
 
