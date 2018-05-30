@@ -47,8 +47,6 @@ class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface
                 $amount = (string)round($amount / $divisor, $currency->exp);
                 if (false !== $pos = strpos($amount, '.')) {
                     $amount = str_pad($amount, $pos + 1 + $currency->exp, '0', STR_PAD_RIGHT);
-                } else {
-                    $amount .= '.' . str_pad('0', $currency->exp, '0', STR_PAD_RIGHT);
                 }
             }
 

@@ -94,10 +94,15 @@ class ConvertPaymentActionTest extends AbstractActionTest
         $p3->setTotalAmount(123450);
         $p3->setCurrencyCode('TND');
 
+        $p4 = clone $p1;
+        $p4->setTotalAmount(123400);
+        $p4->setCurrencyCode('EUR');
+
         return [
             [$p1, '1234.50'],
             [$p2, '123450'],
             [$p3, '123.450'],
+            [$p4, '1234'],
         ];
     }
 }
