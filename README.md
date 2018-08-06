@@ -6,4 +6,23 @@ Payum Monetico (Credit Mutuel/CIC/OBC) payment gateway.
 
 ## Installation / Configuration
 
-TODO
+```
+composer req ekyna/payummonetico
+```
+
+```
+
+use Ekyna\Component\Payum\Monetico\Api\Api;
+use Ekyna\Component\Payum\Monetico\MoneticoGatewayFactory;
+
+$factory = new MoneticoGatewayFactory();
+
+$gateway = $factory->create([
+    'bank'      => Api::BANK_CM,
+    'mode'      => Api::MODE_PRODUCTION,
+    'tpe'       => '123456',
+    'key'       => '123456',
+    'company'   => 'foobar',
+]);
+
+```
