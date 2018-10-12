@@ -42,6 +42,12 @@ class StatusAction implements ActionInterface
             default :
                 $request->markUnknown();
         }
+
+        if ($request->isCaptured() && false != $code = $model['state_override']) {
+            if ($code == 'refunded') {
+                $request->markRefunded();
+            }
+        }
     }
 
     /**

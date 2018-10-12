@@ -30,10 +30,6 @@ class RefundAction implements ActionInterface, GatewayAwareInterface
 
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
-        // TODO
-
-        return;
-
         $this->gateway->execute($status = new GetHumanStatus($model));
         if ($status->isCaptured()) {
             $model['state_override'] = 'refunded';
