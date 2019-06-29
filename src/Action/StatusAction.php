@@ -26,6 +26,13 @@ class StatusAction implements ActionInterface
         $model = ArrayObject::ensureArrayObject($request->getModel());
 
         if (false == $code = $model['code-retour']) {
+            if (false != $code = $model['state_override']) {
+                if ($code === 'canceled') {
+                    $request->markCanceled();
+                    return;
+                }
+            }
+
             $request->markNew();
 
             return;
@@ -44,7 +51,7 @@ class StatusAction implements ActionInterface
         }
 
         if ($request->isCaptured() && false != $code = $model['state_override']) {
-            if ($code == 'refunded') {
+            if ($code === 'refunded') {
                 $request->markRefunded();
             }
         }
