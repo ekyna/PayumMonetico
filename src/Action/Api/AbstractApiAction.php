@@ -82,7 +82,7 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
             $data = array_intersect_key($data, array_flip($filterKeys));
         }
 
-        $data = array_map(function($key, $value) {
+        $data = array_map(function ($key, $value) {
             return "$key: $value";
         }, array_keys($data), $data);
 

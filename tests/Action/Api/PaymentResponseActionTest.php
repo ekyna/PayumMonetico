@@ -16,7 +16,7 @@ class PaymentResponseActionTest extends AbstractActionTest
 {
     protected $requestClass = PaymentResponse::class;
 
-    protected $actionClass  = PaymentResponseAction::class;
+    protected $actionClass = PaymentResponseAction::class;
 
     /**
      * @test

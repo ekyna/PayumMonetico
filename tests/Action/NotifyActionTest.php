@@ -15,7 +15,7 @@ class NotifyActionTest extends AbstractActionTest
 {
     protected $requestClass = Notify::class;
 
-    protected $actionClass  = NotifyAction::class;
+    protected $actionClass = NotifyAction::class;
 
 
     /**

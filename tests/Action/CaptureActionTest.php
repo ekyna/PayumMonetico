@@ -16,7 +16,7 @@ class CaptureActionTest extends AbstractActionTest
 {
     protected $requestClass = Capture::class;
 
-    protected $actionClass  = CaptureAction::class;
+    protected $actionClass = CaptureAction::class;
 
 
     /**

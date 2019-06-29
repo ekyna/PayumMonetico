@@ -270,7 +270,7 @@ class Api
         for ($i = 0; $i < strlen($data); $i++) {
             if (strstr($safeChars, $data[$i])) {
                 $result .= $data[$i];
-            } else if ("7F" >= $var = bin2hex(substr($data, $i, 1))) {
+            } elseif ("7F" >= $var = bin2hex(substr($data, $i, 1))) {
                 $result .= "&#x" . $var . ";";
             } else {
                 $result .= $data[$i];
@@ -420,7 +420,8 @@ class Api
             ->setAllowedValues('locale', ['FR', 'EN', 'DE', 'IT', 'ES', 'NL', 'PT'])
             ->setNormalizer('schedule', function (
                 /** @noinspection PhpUnusedParameterInspection */
-                Options $options, $value
+                Options $options,
+                $value
             ) use ($scheduleResolver) {
                 $schedule = [];
 

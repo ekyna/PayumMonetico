@@ -15,7 +15,7 @@ class SyncActionTest extends AbstractActionTest
 {
     protected $requestClass = Sync::class;
 
-    protected $actionClass  = SyncAction::class;
+    protected $actionClass = SyncAction::class;
 
 
     /**

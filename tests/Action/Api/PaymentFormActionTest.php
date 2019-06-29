@@ -16,7 +16,7 @@ class PaymentFormActionTest extends AbstractActionTest
 {
     protected $requestClass = PaymentForm::class;
 
-    protected $actionClass  = PaymentFormAction::class;
+    protected $actionClass = PaymentFormAction::class;
 
 
     protected function setUp()

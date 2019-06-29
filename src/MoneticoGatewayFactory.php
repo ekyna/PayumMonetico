@@ -44,20 +44,20 @@ class MoneticoGatewayFactory extends GatewayFactory
             'payum.action.sync'            => new Action\SyncAction(),
 
             'payum.action.api.payment_response' => new Action\Api\PaymentResponseAction(),
-            'payum.action.api.payment_form'  => function (ArrayObject $config) {
+            'payum.action.api.payment_form'     => function (ArrayObject $config) {
                 return new Action\Api\PaymentFormAction($config['payum.template.api_request']);
             },
         ]);
 
         if (false == $config['payum.api']) {
-            $config['payum.default_options'] = array(
-                'bank'      => null,
-                'mode'      => null,
-                'tpe'       => null,
-                'key'       => null,
-                'company'   => null,
-                'debug'     => false,
-            );
+            $config['payum.default_options'] = [
+                'bank'    => null,
+                'mode'    => null,
+                'tpe'     => null,
+                'key'     => null,
+                'company' => null,
+                'debug'   => false,
+            ];
 
             $config->defaults($config['payum.default_options']);
             $config['payum.required_options'] = ['bank', 'mode', 'tpe', 'key', 'company'];
@@ -68,12 +68,12 @@ class MoneticoGatewayFactory extends GatewayFactory
                 $api = new Api\Api();
 
                 $api->setConfig([
-                    'bank'      => $config['bank'],
-                    'mode'      => $config['mode'],
-                    'tpe'       => $config['tpe'],
-                    'key'       => $config['key'],
-                    'company'   => $config['company'],
-                    'debug'     => $config['debug'],
+                    'bank'    => $config['bank'],
+                    'mode'    => $config['mode'],
+                    'tpe'     => $config['tpe'],
+                    'key'     => $config['key'],
+                    'company' => $config['company'],
+                    'debug'   => $config['debug'],
                 ]);
 
                 return $api;
@@ -81,7 +81,7 @@ class MoneticoGatewayFactory extends GatewayFactory
         }
 
         $config['payum.paths'] = array_replace([
-            'EkynaPayumMonetico' => __DIR__.'/Resources/views',
+            'EkynaPayumMonetico' => __DIR__ . '/Resources/views',
         ], $config['payum.paths'] ?: []);
     }
 }

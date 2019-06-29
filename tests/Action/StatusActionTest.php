@@ -13,7 +13,7 @@ class StatusActionTest extends AbstractActionTest
 {
     protected $requestClass = GetHumanStatus::class;
 
-    protected $actionClass  = StatusAction::class;
+    protected $actionClass = StatusAction::class;
 
 
     /**
@@ -56,7 +56,7 @@ class StatusActionTest extends AbstractActionTest
     {
         $action = new StatusAction();
         $request = new GetHumanStatus([
-            'code-retour' => 'paiement'
+            'code-retour' => 'paiement',
         ]);
 
         $action->execute($request);
@@ -71,7 +71,7 @@ class StatusActionTest extends AbstractActionTest
     {
         $action = new StatusAction();
         $request = new GetHumanStatus([
-            'code-retour' => 'payetest'
+            'code-retour' => 'payetest',
         ]);
 
         $action->execute($request);
@@ -86,7 +86,7 @@ class StatusActionTest extends AbstractActionTest
     {
         $action = new StatusAction();
         $request = new GetHumanStatus([
-            'code-retour' => 'Annulation'
+            'code-retour' => 'Annulation',
         ]);
 
         $action->execute($request);
@@ -101,7 +101,7 @@ class StatusActionTest extends AbstractActionTest
     {
         $action = new StatusAction();
         $request = new GetHumanStatus([
-            'code-retour' => 'abracadabra'
+            'code-retour' => 'abracadabra',
         ]);
 
         $action->execute($request);

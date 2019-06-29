@@ -1,22 +1,39 @@
 language: php
 
-php:
-  - 7.1
-  - 7.1snapshot
-  - master
+git:
+  depth: 10
 
 sudo: false
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.0
+      env: SYMFONY_VERSION=v3
+    - php: 7.1
+      env: SYMFONY_VERSION=v3
+    - php: 7.2
+      env: SYMFONY_VERSION=v3
+    - php: 7.1
+      env: SYMFONY_VERSION=v4
+    - php: 7.2
+      env: SYMFONY_VERSION=v4
+    - php: 7.3
+      env: SYMFONY_VERSION=v4
+
 before_install:
   - composer self-update
-  - composer clear-cache
 
 install:
-  - travis_retry composer update --no-interaction --no-ansi --no-progress --no-suggest --optimize-autoloader --prefer-stable
+  - composer require dunglas/symfony-lock:${SYMFONY_VERSION} --no-update
+  - composer install --prefer-source
 
 script:
   - ./vendor/bin/phpunit
 
 notifications:
-  email: false
-
+  email:
+    - contact@ekyna.com
