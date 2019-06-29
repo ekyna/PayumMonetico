@@ -7,7 +7,7 @@ Payum Monetico (Credit Mutuel/CIC/OBC) payment gateway.
 ## Installation / Configuration
 
 ```
-composer req ekyna/payummonetico
+composer req ekyna/payum-monetico
 ```
 
 ```
