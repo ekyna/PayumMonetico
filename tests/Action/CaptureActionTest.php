@@ -36,7 +36,6 @@ class CaptureActionTest extends AbstractActionTest
 
         $model = $request->getModel();
 
-        $this->assertArrayNotHasKey('return_url', $model);
         $this->assertArrayNotHasKey('success_url', $model);
         $this->assertArrayNotHasKey('failure_url', $model);
     }
@@ -64,7 +63,6 @@ class CaptureActionTest extends AbstractActionTest
 
         $model = $request->getModel();
 
-        $this->assertEquals($model['return_url'], $expectedTargetUrl);
         $this->assertEquals($model['success_url'], $expectedTargetUrl);
         $this->assertEquals($model['failure_url'], $expectedTargetUrl);
     }
@@ -130,7 +128,6 @@ class CaptureActionTest extends AbstractActionTest
 
         $request = new Capture([]);
         $request->setModel([
-            'return_url'  => 'set',
             'success_url' => 'set',
             'failure_url' => 'set',
         ]);

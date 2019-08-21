@@ -34,7 +34,7 @@ class CaptureAction implements ActionInterface, GatewayAwareInterface
         if ($request->getToken()) {
             // Done redirection urls
             $targetUrl = $request->getToken()->getTargetUrl();
-            foreach (['return_url', 'success_url', 'failure_url'] as $field) {
+            foreach (['success_url', 'failure_url'] as $field) {
                 if (false == $model[$field]) {
                     $model[$field] = $targetUrl;
                 }
@@ -44,7 +44,7 @@ class CaptureAction implements ActionInterface, GatewayAwareInterface
             // Create a dedicated controller to handle notification.
         }
 
-        if (false == $model['date'] && ($model['return_url'] && $model['success_url'] && $model['failure_url'])) {
+        if (false == $model['date'] && ($model['success_url'] && $model['failure_url'])) {
             $this->gateway->execute(new PaymentForm($model));
         }
 

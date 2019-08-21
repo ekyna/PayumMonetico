@@ -37,11 +37,10 @@ class MoneticoGatewayFactory extends GatewayFactory
 
             'payum.template.api_request' => '@EkynaPayumMonetico/api_request.html.twig',
 
-            'payum.action.capture'         => new Action\CaptureAction(),
-            'payum.action.convert_payment' => new Action\ConvertPaymentAction(),
-            'payum.action.notify'          => new Action\NotifyAction(),
-            'payum.action.status'          => new Action\StatusAction(),
-            'payum.action.sync'            => new Action\SyncAction(),
+            'payum.action.capture' => new Action\CaptureAction(),
+            'payum.action.notify'  => new Action\NotifyAction(),
+            'payum.action.status'  => new Action\StatusAction(),
+            'payum.action.sync'    => new Action\SyncAction(),
 
             'payum.action.api.payment_response' => new Action\Api\PaymentResponseAction(),
             'payum.action.api.payment_form'     => function (ArrayObject $config) {

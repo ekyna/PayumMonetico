@@ -2,7 +2,6 @@
 
 namespace Ekyna\Component\Payum\Monetico\Action;
 
-use Ekyna\Component\Payum\Monetico\Api\Api;
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
@@ -32,10 +31,6 @@ class NotifyAction implements ActionInterface, GatewayAwareInterface
         $details = ArrayObject::ensureArrayObject($request->getModel());
 
         $this->gateway->execute(new Sync($details));
-
-        // TODO Send receipt to Monetico Paiement server
-        // Api::NOTIFY_SUCCESS;
-        // Api::NOTIFY_FAILURE;
     }
 
     /**

@@ -27,6 +27,8 @@ class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface
      */
     public function execute($request)
     {
+        throw new RequestNotSupportedException('Do not use, this is a sample.');
+
         RequestNotSupportedException::assertSupports($this, $request);
 
         /** @var PaymentInterface $payment */
@@ -59,6 +61,18 @@ class ConvertPaymentAction implements ActionInterface, GatewayAwareInterface
         if (false == $model['comment']) {
             $model['comment'] = 'Customer: ' . $payment->getClientId();
         }
+
+        // The 3DSecure v2 require that you provide the order context.
+        // @see https://www.monetico-paiement.fr/fr/info/documentations/Monetico_Paiement_documentation_technique_v2.1.pdf (page 73)
+        /* TODO $address = ...;
+        $model['context'] = [
+            'billing' => [
+                'addressLine1' => $address->getStreet(),
+                'city'         => $address->getCity(),
+                'postalCode'   => $address->getPostalCode(),
+                'country'      => $address->getCountry(),
+            ]
+        ];*/
 
         $request->setResult((array)$model);
     }
