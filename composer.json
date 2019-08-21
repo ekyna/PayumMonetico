@@ -23,7 +23,7 @@
         "payum/core": "^1.5",
         "psr/log": "~1.0",
         "symfony/options-resolver": "~3.0|~4.0",
-        "sokil/php-isocodes": "^3.0"
+        "sokil/php-isocodes": "~2.0|~3.0"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "^1.1",
