@@ -2,12 +2,12 @@
 
 namespace Ekyna\Component\Payum\Monetico\Api;
 
+use Ekyna\Component\Payum\Monetico\Api\Options\ConfigResolver;
+use Ekyna\Component\Payum\Monetico\Api\Options\RequestResolver;
 use Payum\Core\Exception\InvalidArgumentException;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\Exception\RuntimeException;
 use Symfony\Component\OptionsResolver\Exception\ExceptionInterface;
-use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class Api
@@ -16,10 +16,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class Api
 {
-    const BANK_CM  = 'CM';
-    const BANK_CIC = 'CIC';
-    const BANK_OBC = 'OBC';
-
     const TYPE_PAYMENT = 'payment';
     const TYPE_CANCEL  = 'cancel';
     const TYPE_CAPTURE = 'capture';
@@ -34,12 +30,12 @@ class Api
     const VERSION = '3.0';
 
     /**
-     * @var OptionsResolver
+     * @var ConfigResolver
      */
     private $configResolver;
 
     /**
-     * @var OptionsResolver
+     * @var RequestResolver
      */
     private $requestOptionsResolver;
 
@@ -85,48 +81,52 @@ class Api
         }
 
         $fields = [
-            'TPE'         => $this->config['tpe'],
-            'date'        => $data['date'],
-            'montant'     => $data['amount'] . $data['currency'],
-            'reference'   => $data['reference'],
-            'texte-libre' => $data['comment'],
-            'version'     => static::VERSION,
-            'lgue'        => $data['locale'],
-            'societe'     => $this->config['company'],
-            'mail'        => $data['email'],
+            'TPE'               => $this->config['tpe'],
+            'societe'           => $this->config['company'],
+            'version'           => static::VERSION,
+            'lgue'              => $data['locale'],
+            'date'              => $data['date'],
+            'montant'           => $data['amount'] . $data['currency'],
+            'reference'         => $data['reference'],
+            'mail'              => $data['email'],
+            'texte-libre'       => $data['comment'],
+            'url_retour_ok'     => $data['success_url'],
+            'url_retour_err'    => $data['failure_url'],
+            'contexte_commande' => base64_encode(utf8_encode(json_encode($data['context']))),
         ];
 
-        $macData = array_values($fields);
-
-        $fields['texte-libre'] = $this->htmlEncode($data['comment']);
-
-        if (!empty($data['schedule'])) {
-            $macData[] = $fields['nbrech'] = count($data['schedule']);
-
-            $count = 0;
-            foreach ($data['schedule'] as $datum) {
-                $count++;
-                $macData[] = $fields['dateech' . $count] = $datum['date'];
-                $macData[] = $fields['montantech' . $count] = $datum['amount'] . $data['currency'];
+        $fields['nbrech'] = count($data['schedule']);
+        for ($i = 1; $i < 5; $i++) {
+            if (!isset($data['schedule'][$i])) {
+                $fields['dateech' . $i] = null;
+                $fields['montantech' . $i] = null;
+                continue;
             }
 
-            // Fills empty schedule
-            for ($i = 2 * $count + 10; $i < 18; $i++) {
-                $macData[] = null;
-            }
-
-            $options = [];
-            foreach ($data['options'] as $key => $value) {
-                $options = "$key=$value";
-            }
-            $macData[] = $fields['options'] = implode('&', $options);
+            $fields['dateech' . $i] = $data['schedule'][$i]['date'];
+            $fields['montantech' . $i] = $data['schedule'][$i]['amount'] . $data['currency'];
         }
 
-        $fields['MAC'] = $this->computeMac($macData);
+        $optional = [
+            'aliascb',
+            'forcesaisiecb',
+            '3dsdebrayable',
+            'ThreeDSecureChallenge',
+            'libelleMonetique',
+            'desactivemoyenpaiement',
+            'protocole',
+        ];
+        foreach ($optional as $key) {
+            if (isset($data[$key])) {
+                $fields[$key] = (string)$data[$key];
+            }
+        }
 
-        $fields['url_retour'] = $data['return_url'];
-        $fields['url_retour_ok'] = $data['success_url'];
-        $fields['url_retour_err'] = $data['failure_url'];
+        ksort($fields);
+
+        $fields['MAC'] = $this->computeMac($fields);
+
+        $fields['texte-libre'] = $this->htmlEncode($data['comment']);
 
         return [
             'action' => $this->getEndpointUrl(static::TYPE_PAYMENT),
@@ -148,52 +148,23 @@ class Api
             return false;
         }
 
-        $data = array_replace([
-            'date'        => null,
-            'montant'     => null,
-            'reference'   => null,
-            'texte-libre' => null,
-            'code-retour' => null,
-            'cvx'         => null,
-            'vld'         => null,
-            'brand'       => null,
-            'status3ds'   => null,
-            'numauto'     => null,
-            'motifrefus'  => null,
-            'originecb'   => null,
-            'bincb'       => null,
-            'hpancb'      => null,
-            'ipclient'    => null,
-            'originetr'   => null,
-            'veres'       => null,
-            'pares'       => null,
-        ], $data);
+        if (isset($data['TPE']) && $data['TPE'] != $this->config['tpe']) {
+            return false;
+        }
 
-        $macData = [
-            $this->config['tpe'],
-            $data["date"],
-            $data['montant'],
-            $data['reference'],
-            $data['texte-libre'],
-            static::VERSION,
-            $data['code-retour'],
-            $data['cvx'],
-            $data['vld'],
-            $data['brand'],
-            $data['status3ds'],
-            $data['numauto'],
-            $data['motifrefus'],
-            $data['originecb'],
-            $data['bincb'],
-            $data['hpancb'],
-            $data['ipclient'],
-            $data['originetr'],
-            $data['veres'],
-            $data['pares'],
-            null,
-        ];
+        if (isset($data['version']) && $data['version'] != static::VERSION) {
+            return false;
+        }
 
-        return strtolower($data['MAC']) === $this->computeMac($macData);
+        $mac = strtolower($data['MAC']);
+
+        unset($data['MAC']);
+
+        ksort($data);
+
+        $test = $this->computeMac($data);
+
+        return $mac === $test;
     }
 
     /**
@@ -205,11 +176,11 @@ class Api
      */
     public function computeMac(array $data)
     {
-        for ($i = count($data); $i < 19; $i++) {
-            $data[$i] = null;
-        }
+        $hash = implode('*', array_map(function ($key, $value) {
+            return "$key=$value";
+        }, array_keys($data), array_values($data)));
 
-        return strtolower(hash_hmac("sha1", implode('*', array_values($data)), $this->getMacKey()));
+        return strtolower(hash_hmac("sha1", $hash, $this->getMacKey()));
     }
 
     /**
@@ -289,16 +260,17 @@ class Api
      */
     private function getEndpointUrl($type)
     {
-        switch ($this->config['bank']) {
-            case static::BANK_CM:
-                $host = 'https://paiement.creditmutuel.fr/';
+        switch ($type) {
+            case static::TYPE_PAYMENT:
+            case static::TYPE_CANCEL:
+                $host = 'https://p.monetico-services.com/';
                 break;
-            case static::BANK_CIC:
-                $host = 'https://ssl.paiement.cic-banques.fr/';
+
+            case static::TYPE_CAPTURE:
+            case static::TYPE_REFUND:
+                $host = 'https://payment-api.e-i.com/';
                 break;
-            case static::BANK_OBC:
-                $host = 'https://ssl.paiement.banque-obc.fr/';
-                break;
+
             default:
                 throw new RuntimeException('Failed to determine the endpoint host.');
         }
@@ -307,18 +279,22 @@ class Api
             case static::TYPE_PAYMENT:
                 $path = 'paiement.cgi';
                 break;
-            case static::BANK_CIC:
+
+            case static::TYPE_CANCEL:
+            case static::TYPE_CAPTURE:
                 $path = 'capture_paiement.cgi';
                 break;
-            case static::BANK_OBC:
+
+            case static::TYPE_REFUND:
                 $path = 'recredit_paiement.cgi';
                 break;
+
             default:
                 throw new RuntimeException('Failed to determine the endpoint path.');
         }
 
         if ($this->config['mode'] === static::MODE_TEST) {
-            $path = 'test/' . $path;
+            return $host . 'test/' . $path;
         }
 
         return $host . $path;
@@ -327,114 +303,28 @@ class Api
     /**
      * Returns the config option resolver.
      *
-     * @return OptionsResolver
+     * @return ConfigResolver
      */
-    private function getConfigResolver()
+    private function getConfigResolver(): ConfigResolver
     {
         if (null !== $this->configResolver) {
             return $this->configResolver;
         }
 
-        $resolver = new OptionsResolver();
-        $resolver
-            ->setDefaults([
-                'mode'  => static::MODE_TEST,
-                'debug' => false,
-            ])
-            ->setRequired([
-                'bank',
-                'tpe',
-                'key',
-                'company',
-            ])
-            ->setAllowedTypes('bank', 'string')
-            ->setAllowedTypes('mode', 'string')
-            ->setAllowedTypes('tpe', 'string')
-            ->setAllowedTypes('key', 'string')
-            ->setAllowedTypes('company', 'string')
-            ->setAllowedTypes('debug', 'bool')
-            ->setAllowedValues('bank', [static::BANK_CM, static::BANK_CIC, static::BANK_OBC])
-            ->setAllowedValues('mode', [static::MODE_TEST, static::MODE_PRODUCTION]);
-
-        return $this->configResolver = $resolver;
+        return $this->configResolver = new ConfigResolver();
     }
 
     /**
      * Returns request options resolver.
      *
-     * @return OptionsResolver
+     * @return RequestResolver
      */
-    private function getRequestOptionsResolver()
+    private function getRequestOptionsResolver(): RequestResolver
     {
         if (null !== $this->requestOptionsResolver) {
             return $this->requestOptionsResolver;
         }
 
-        $amountValidator = function ($value) {
-            return preg_match('~^[0-9]+(\.[0-9]{2,3})?$~', $value);
-        };
-
-        $scheduleResolver = new OptionsResolver();
-        $scheduleResolver
-            ->setRequired(['date', 'amount'])
-            ->setAllowedTypes('date', 'string')
-            ->setAllowedTypes('amount', 'numeric')
-            ->setAllowedValues('date', function ($value) {
-                return preg_match('~^[0-9]{2}/[0-9]{2}/[0-9]{4}$~', $value);
-            })
-            ->setAllowedValues('amount', $amountValidator);
-
-        $resolver = new OptionsResolver();
-        $resolver
-            ->setRequired([
-                'reference',
-                'date',
-                'amount',
-                'currency',
-                'email',
-                'return_url',
-                'success_url',
-                'failure_url',
-            ])
-            ->setDefaults([
-                'locale'   => 'FR',
-                'comment'  => null,
-                'schedule' => [],
-                'options'  => [],
-            ])
-            ->setAllowedTypes('reference', 'string')
-            ->setAllowedTypes('date', 'string')
-            ->setAllowedTypes('amount', 'numeric')
-            ->setAllowedTypes('currency', 'string')
-            ->setAllowedTypes('email', 'string')
-            ->setAllowedTypes('return_url', 'string')
-            ->setAllowedTypes('success_url', 'string')
-            ->setAllowedTypes('failure_url', 'string')
-            ->setAllowedTypes('comment', 'string')
-            ->setAllowedTypes('schedule', 'array')
-            ->setAllowedTypes('options', 'array')
-            ->setAllowedValues('date', function ($value) {
-                return preg_match('~^[0-9]{2}/[0-9]{2}/[0-9]{4}:[0-9]{2}:[0-9]{2}:[0-9]{2}$~', $value);
-            })
-            ->setAllowedValues('amount', $amountValidator)
-            ->setAllowedValues('locale', ['FR', 'EN', 'DE', 'IT', 'ES', 'NL', 'PT'])
-            ->setNormalizer('schedule', function (
-                /** @noinspection PhpUnusedParameterInspection */
-                Options $options,
-                $value
-            ) use ($scheduleResolver) {
-                $schedule = [];
-
-                foreach ($value as $data) {
-                    $schedule[] = $scheduleResolver->resolve($data);
-                }
-
-                return $schedule;
-            })
-            ->setAllowedValues('schedule', function ($value) {
-                return empty($value) || (1 < count($value));
-            });
-
-        return $this->requestOptionsResolver = $resolver;
+        return $this->requestOptionsResolver = new RequestResolver();
     }
 }

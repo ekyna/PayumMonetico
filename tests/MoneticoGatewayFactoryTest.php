@@ -6,6 +6,8 @@ use Ekyna\Component\Payum\Monetico\Api\Api;
 use Payum\Core\CoreGatewayFactory;
 use Payum\Core\Exception\LogicException;
 use Payum\Core\GatewayFactory;
+use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 
 /**
  * Class MoneticoGatewayFactoryTest
@@ -16,7 +18,7 @@ class MoneticoGatewayFactoryTest extends TestCase
 {
     public function test_extends_GatewayFactory()
     {
-        $rc = new \ReflectionClass(MoneticoGatewayFactory::class);
+        $rc = new ReflectionClass(MoneticoGatewayFactory::class);
 
         $this->assertTrue($rc->isSubclassOf(GatewayFactory::class));
     }
@@ -49,11 +51,10 @@ class MoneticoGatewayFactoryTest extends TestCase
         $factory = new MoneticoGatewayFactory();
 
         $gateway = $factory->create([
-            'bank'      => Api::BANK_CM,
-            'mode'      => Api::MODE_PRODUCTION,
-            'tpe'       => '123456',
-            'key'       => '123456',
-            'company'   => 'foobar',
+            'mode'    => Api::MODE_PRODUCTION,
+            'tpe'     => '123456',
+            'key'     => '123456',
+            'company' => 'foobar',
         ]);
 
         $this->assertInstanceOf('Payum\Core\Gateway', $gateway);
@@ -111,7 +112,7 @@ class MoneticoGatewayFactoryTest extends TestCase
     public function test_throw_if_required_options_not_passed()
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('The bank, mode, tpe, key, company fields are required.');
+        $this->expectExceptionMessage('The mode, tpe, key, company fields are required.');
 
         $factory = new MoneticoGatewayFactory();
 

@@ -51,7 +51,6 @@ class MoneticoGatewayFactory extends GatewayFactory
 
         if (false == $config['payum.api']) {
             $config['payum.default_options'] = [
-                'bank'    => null,
                 'mode'    => null,
                 'tpe'     => null,
                 'key'     => null,
@@ -60,7 +59,7 @@ class MoneticoGatewayFactory extends GatewayFactory
             ];
 
             $config->defaults($config['payum.default_options']);
-            $config['payum.required_options'] = ['bank', 'mode', 'tpe', 'key', 'company'];
+            $config['payum.required_options'] = ['mode', 'tpe', 'key', 'company'];
 
             $config['payum.api'] = function (ArrayObject $config) {
                 $config->validateNotEmpty($config['payum.required_options']);
@@ -68,7 +67,6 @@ class MoneticoGatewayFactory extends GatewayFactory
                 $api = new Api\Api();
 
                 $api->setConfig([
-                    'bank'    => $config['bank'],
                     'mode'    => $config['mode'],
                     'tpe'     => $config['tpe'],
                     'key'     => $config['key'],

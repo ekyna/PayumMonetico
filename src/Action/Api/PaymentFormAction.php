@@ -7,6 +7,7 @@ use Payum\Core\Bridge\Spl\ArrayObject;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Reply\HttpResponse;
 use Payum\Core\Request\RenderTemplate;
+use ArrayAccess;
 
 /**
  * Class PaymentFormAction
@@ -32,7 +33,7 @@ class PaymentFormAction extends AbstractApiAction
     /**
      * @inheritdoc
      *
-     * @throws \Payum\Core\Reply\HttpRedirect
+     * @throws HttpResponse
      */
     public function execute($request)
     {
@@ -82,6 +83,6 @@ class PaymentFormAction extends AbstractApiAction
     public function supports($request)
     {
         return $request instanceof PaymentForm
-            && $request->getModel() instanceof \ArrayAccess;
+            && $request->getModel() instanceof ArrayAccess;
     }
 }

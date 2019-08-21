@@ -18,7 +18,6 @@ use Ekyna\Component\Payum\Monetico\MoneticoGatewayFactory;
 $factory = new MoneticoGatewayFactory();
 
 $gateway = $factory->create([
-    'bank'      => Api::BANK_CM,
     'mode'      => Api::MODE_PRODUCTION,
     'tpe'       => '123456',
     'key'       => '123456',
