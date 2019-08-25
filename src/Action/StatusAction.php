@@ -44,9 +44,11 @@ class StatusAction implements ActionInterface
             case "paiement" : // paiement accepté (en Production uniquement)
                 $request->markCaptured();
                 break;
+
             case "Annulation" : // contacter l’émetteur de carte
                 $request->markFailed();
                 break;
+
             default :
                 $request->markUnknown();
         }

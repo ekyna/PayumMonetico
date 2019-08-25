@@ -1,21 +1,27 @@
 {% extends layout ?: "@PayumCore/layout.html.twig" %}
 
-{% block payum_body %}
+{% block payum_body -%}
+    {% if not debug -%}
     <p id="message" style="text-align:center;padding-top:50px;display:none;">
         Vous allez être redirigé vers le site de la banque&hellip;
     </p>
+    {%- endif %}
     <form action="{{ action|raw }}" method="{{ method }}" name="MoneticoPaymentForm" id="MoneticoPaymentForm">
         {% for name, value in fields -%}
         <input type="hidden" name="{{ name }}" value="{{ value|raw }}">
         {%- endfor %}
-        <noscript>
+        {% if not debug %}<noscript>{% endif -%}
             <p style="text-align:center;padding-top:50px;">
-                <button id="submit" type="submit" value="Continuer vers le site de la banque"></button>
+                <button id="submit" type="submit">
+                    Continuer vers le site de la banque
+                </button>
             </p>
-        </noscript>
+        {%- if not debug %}</noscript>{% endif %}
     </form>
+    {% if not debug -%}
     <script type="application/javascript">
         document.getElementById('message').style.display = 'block';
         document.getElementById('MoneticoPaymentForm').submit();
     </script>
+    {%- endif %}
 {% endblock %}

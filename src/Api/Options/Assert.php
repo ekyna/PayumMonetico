@@ -49,7 +49,7 @@ class Assert
 
             $length = strlen($value);
 
-            return (1 < $length) && ($length <= $max);
+            return (1 <= $length) && ($length <= $max);
         };
     }
 
@@ -78,7 +78,7 @@ class Assert
 
             $length = strlen($value);
 
-            return (1 < $length) && ($length <= $max);
+            return (1 <= $length) && ($length <= $max);
         };
     }
 

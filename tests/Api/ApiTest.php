@@ -104,15 +104,16 @@ class ApiTest extends TestCase
                 'montantech2'       => null,
                 'montantech3'       => null,
                 'montantech4'       => null,
-                'nbrech'            => 0,
+                'nbrech'            => null,
                 'reference'         => '100008783',
                 'societe'           => 'foobar',
                 'texte-libre'       => 'Commande&#x20;100008783',
                 'url_retour_ok'     => 'http://example.org',
                 'url_retour_err'    => 'http://example.org',
                 'version'           => '3.0',
-                'MAC'               => '14ea2a9f24e2ce030889a8176f0cf2c87abf5a10',
+                'MAC'               => '2ea1cd9bd82fbcbf5edf29c18e0269e6e5d7f86a',
             ],
+            'debug' => false,
         ];
 
         $this->assertEquals($expected, $actual);

@@ -95,7 +95,7 @@ class Api
             'contexte_commande' => base64_encode(utf8_encode(json_encode($data['context']))),
         ];
 
-        $fields['nbrech'] = count($data['schedule']);
+        $fields['nbrech'] = (0 < $count = count($data['schedule'])) ? $count : null;
         for ($i = 1; $i < 5; $i++) {
             if (!isset($data['schedule'][$i])) {
                 $fields['dateech' . $i] = null;
@@ -132,6 +132,7 @@ class Api
             'action' => $this->getEndpointUrl(static::TYPE_PAYMENT),
             'method' => 'POST',
             'fields' => $fields,
+            'debug'  => $this->config['debug'],
         ];
     }
 
