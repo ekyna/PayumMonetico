@@ -53,7 +53,7 @@ class RequestResolver extends OptionsResolver
             ->setAllowedValues('currency', Assert::currency())
             ->setAllowedTypes('reference', 'string')
             ->setAllowedValues('reference', function ($value) {
-                return preg_match('~^[0-9A-Za-z]{1,12}$~', $value);
+                return preg_match('~^[0-9A-Za-z]{1,50}$~', $value);
             });
 
         $this
