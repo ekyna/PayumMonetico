@@ -18,8 +18,7 @@ class PaymentFormActionTest extends AbstractActionTest
 
     protected $actionClass = PaymentFormAction::class;
 
-
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->action = new $this->actionClass('template');
     }
@@ -31,7 +30,8 @@ class PaymentFormActionTest extends AbstractActionTest
     {
         // TODO Remove this test...
         //$this->markTestSkipped();
-        new $this->actionClass('template');
+        $action = new $this->actionClass('template');
+        $this->assertInstanceOf(PaymentFormAction::class, $action);
     }
 
     /**

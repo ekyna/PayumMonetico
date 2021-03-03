@@ -2,7 +2,7 @@
 
 Payum Monetico (Credit Mutuel/CIC/OBC) payment gateway.
 
-[![Build Status](https://travis-ci.org/ekyna/PayumMonetico.svg?branch=master)](https://travis-ci.org/ekyna/PayumMonetico)
+[![Build Status][ico-github-actions]][link-github-actions]
 
 ## Installation / Configuration
 
@@ -75,3 +75,6 @@ public function notifyAction(Request $request)
     return new Response(\Ekyna\Component\Payum\Monetico\Api\Api::NOTIFY_SUCCESS);
 }
 ```
+
+[ico-github-actions]: https://github.com/ekyna/PayumMonetico/workflows/Build/badge.svg
+[link-github-actions]: https://github.com/ekyna/PayumMonetico/actions?query=workflow%3A"Build"
