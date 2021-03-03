@@ -18,11 +18,11 @@
     "homepage" : "https://github.com/ekyna/PayumMonetico",
     "license" : "MIT",
     "require" : {
-        "php" : "^7.0",
+        "php" : "^7.1",
         "ext-json": "*",
         "payum/core": "^1.5",
         "psr/log": "~1.0",
-        "symfony/options-resolver": "~3.0|~4.0",
+        "symfony/options-resolver": "~3.0|~4.0|~5.0",
         "sokil/php-isocodes": "~2.0|~3.0"
     },
     "require-dev": {
