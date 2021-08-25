@@ -116,7 +116,13 @@ class RequestResolver extends OptionsResolver
                 return is_null($value) || preg_match('~^[A-Za-z0-9 ]{1,32}$~', $value);
             })
             ->setAllowedTypes('desactivemoyenpaiement', ['null', 'string'])
-            ->setAllowedValues('desactivemoyenpaiement', [null, '1euro', '3xcb', '4xcb', 'paypal', 'lyfpay'])
+            ->setAllowedValues('desactivemoyenpaiement', function ($value) {
+                $founded = false;
+                foreach (explode(',', $value) as $key) {
+                    $founded = in_array($key, [null, '1euro', '3xcb', '4xcb', 'paypal', 'lyfpay']);
+                }
+                return $founded;
+            })
             ->setAllowedTypes('aliascb', ['null', 'string'])
             ->setAllowedValues('aliascb', function ($value) {
                 return is_null($value) || preg_match('~^[a-zA-Z0-9]{1,64}$~', $value);
