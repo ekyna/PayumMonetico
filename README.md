@@ -4,6 +4,9 @@ Payum Monetico (Credit Mutuel/CIC/OBC) payment gateway.
 
 [![Build Status][ico-github-actions]][link-github-actions]
 
+* __Symfony__ bundle available [here](https://github.com/ekyna/PayumMoneticoBundle).
+* __Sylius__ plugin available [here](https://github.com/FLUX-SE/SyliusPayumMoneticoPlugin).
+
 ## Installation / Configuration
 
 ```bash
