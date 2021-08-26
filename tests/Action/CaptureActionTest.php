@@ -74,7 +74,7 @@ class CaptureActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($this->isInstanceOf(Sync::class));
 
@@ -94,7 +94,7 @@ class CaptureActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($this->isInstanceOf(Sync::class));
 
@@ -114,14 +114,12 @@ class CaptureActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->exactly(2))
             ->method('execute')
-            ->with($this->isInstanceOf(PaymentForm::class));
-
-        $gatewayMock
-            ->expects($this->at(1))
-            ->method('execute')
-            ->with($this->isInstanceOf(Sync::class));
+            ->withConsecutive(
+                [$this->isInstanceOf(PaymentForm::class)],
+                [$this->isInstanceOf(Sync::class)]
+            );
 
         $action = new CaptureAction();
         $action->setGateway($gatewayMock);

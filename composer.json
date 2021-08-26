@@ -18,7 +18,7 @@
     "homepage" : "https://github.com/ekyna/PayumMonetico",
     "license" : "MIT",
     "require" : {
-        "php" : "^7.1",
+        "php" : "^7.1|^8.0",
         "ext-json": "*",
         "payum/core": "^1.5",
         "psr/log": "~1.0",
@@ -26,8 +26,8 @@
         "sokil/php-isocodes": "~2.0|~3.0"
     },
     "require-dev": {
-        "php-http/guzzle6-adapter": "^1.1",
-        "phpunit/phpunit": "^7"
+        "php-http/guzzle6-adapter": "^1.1|^2.0",
+        "phpunit/phpunit": "^7|^8|^9"
     },
     "autoload" : {
         "psr-4" : {

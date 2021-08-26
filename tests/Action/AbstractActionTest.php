@@ -6,6 +6,7 @@ use Ekyna\Component\Payum\Monetico\Api\Api;
 use Payum\Core\GatewayInterface;
 use Payum\Core\Security\TokenInterface;
 use Payum\Core\Tests\GenericActionTest;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class AbstractActionTest
@@ -25,7 +26,7 @@ abstract class AbstractActionTest extends GenericActionTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|GatewayInterface
+     * @return MockObject&GatewayInterface
      */
     protected function createGatewayMock()
     {
@@ -33,7 +34,7 @@ abstract class AbstractActionTest extends GenericActionTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|TokenInterface
+     * @return MockObject&TokenInterface
      */
     protected function createTokenMock()
     {
@@ -41,7 +42,7 @@ abstract class AbstractActionTest extends GenericActionTest
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject|Api
+     * @return MockObject&Api
      */
     protected function createApiMock()
     {

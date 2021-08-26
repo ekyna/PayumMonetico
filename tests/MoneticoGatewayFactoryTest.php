@@ -5,6 +5,7 @@ namespace Ekyna\Component\Payum\Monetico;
 use Ekyna\Component\Payum\Monetico\Api\Api;
 use Payum\Core\CoreGatewayFactory;
 use Payum\Core\Exception\LogicException;
+use Payum\Core\Gateway;
 use Payum\Core\GatewayFactory;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -30,22 +31,6 @@ class MoneticoGatewayFactoryTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function test_core_factory_created_if_not_passed()
-    {
-        $factory = new MoneticoGatewayFactory();
-
-        $this->assertAttributeInstanceOf(CoreGatewayFactory::class, 'coreGatewayFactory', $factory);
-    }
-
-    public function test_core_factory_used_if_passed()
-    {
-        $coreFactory = $this->createMock('Payum\Core\GatewayFactoryInterface');
-
-        $moneticoFactory = new MoneticoGatewayFactory([], $coreFactory);
-
-        $this->assertAttributeSame($coreFactory, 'coreGatewayFactory', $moneticoFactory);
-    }
-
     public function test_create_gateway()
     {
         $factory = new MoneticoGatewayFactory();
@@ -57,13 +42,7 @@ class MoneticoGatewayFactoryTest extends TestCase
             'company' => 'foobar',
         ]);
 
-        $this->assertInstanceOf('Payum\Core\Gateway', $gateway);
-        $this->assertAttributeNotEmpty('apis', $gateway);
-        $this->assertAttributeNotEmpty('actions', $gateway);
-
-        $extensions = $this->readAttribute($gateway, 'extensions');
-
-        $this->assertAttributeNotEmpty('extensions', $extensions);
+        $this->assertInstanceOf(Gateway::class, $gateway);
     }
 
     public function test_create_config()
@@ -72,7 +51,7 @@ class MoneticoGatewayFactoryTest extends TestCase
 
         $config = $factory->createConfig();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
         $this->assertNotEmpty($config);
     }
 
@@ -85,7 +64,7 @@ class MoneticoGatewayFactoryTest extends TestCase
 
         $config = $factory->createConfig();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
 
         $this->assertArrayHasKey('foo', $config);
         $this->assertEquals('fooVal', $config['foo']);
@@ -100,7 +79,7 @@ class MoneticoGatewayFactoryTest extends TestCase
 
         $config = $factory->createConfig();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
 
         $this->assertArrayHasKey('payum.factory_name', $config);
         $this->assertEquals('monetico', $config['payum.factory_name']);
@@ -125,10 +104,10 @@ class MoneticoGatewayFactoryTest extends TestCase
 
         $config = $factory->createConfig();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
         $this->assertNotEmpty($config);
 
-        $this->assertInternalType('array', $config['payum.paths']);
+        $this->assertIsArray($config['payum.paths']);
         $this->assertNotEmpty($config['payum.paths']);
 
         $this->assertArrayHasKey('PayumCore', $config['payum.paths']);
