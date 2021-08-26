@@ -2,6 +2,7 @@
 
 namespace Ekyna\Component\Payum\Monetico\Action;
 
+use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\GetHumanStatus;
 
 /**
@@ -27,12 +28,12 @@ class StatusActionTest extends AbstractActionTest
 
     /**
      * @test
-     *
-     * @expectedException \Payum\Core\Exception\RequestNotSupportedException
      */
     public function throw_if_not_supported_request()
     {
         $action = new StatusAction();
+
+        $this->expectException(RequestNotSupportedException::class);
         $action->execute(new \stdClass());
     }
 

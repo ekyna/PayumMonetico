@@ -27,7 +27,7 @@ class PaymentResponseActionTest extends AbstractActionTest
 
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($httpRequest);
 
@@ -54,7 +54,7 @@ class PaymentResponseActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($this->isInstanceOf(GetHttpRequest::class))
             ->will($this->returnCallback(function (GetHttpRequest $request) {
@@ -85,7 +85,7 @@ class PaymentResponseActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($this->isInstanceOf(GetHttpRequest::class))
             ->will($this->returnCallback(function (GetHttpRequest $request) {
@@ -95,7 +95,7 @@ class PaymentResponseActionTest extends AbstractActionTest
 
         $apiMock = $this->createApiMock();
         $apiMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('checkPaymentResponse')
             ->with($this->isType('array'));
 
@@ -116,7 +116,7 @@ class PaymentResponseActionTest extends AbstractActionTest
     {
         $gatewayMock = $this->createGatewayMock();
         $gatewayMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('execute')
             ->with($this->isInstanceOf(GetHttpRequest::class))
             ->will($this->returnCallback(function (GetHttpRequest $request) {
@@ -126,7 +126,7 @@ class PaymentResponseActionTest extends AbstractActionTest
 
         $apiMock = $this->createApiMock();
         $apiMock
-            ->expects($this->at(0))
+            ->expects($this->once())
             ->method('checkPaymentResponse')
             ->with($this->isType('array'));
 
