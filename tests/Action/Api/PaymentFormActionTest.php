@@ -26,17 +26,6 @@ class PaymentFormActionTest extends AbstractActionTest
     /**
      * @test
      */
-    public function couldBeConstructedWithoutAnyArguments()
-    {
-        // TODO Remove this test...
-        //$this->markTestSkipped();
-        $action = new $this->actionClass('template');
-        $this->assertInstanceOf(PaymentFormAction::class, $action);
-    }
-
-    /**
-     * @test
-     */
     public function should_call_api_create_payment_form_and_execute_render_template()
     {
         $apiMock = $this->createApiMock();

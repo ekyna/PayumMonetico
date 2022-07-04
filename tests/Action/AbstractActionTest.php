@@ -16,16 +16,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 abstract class AbstractActionTest extends GenericActionTest
 {
     /**
-     * @test
-     */
-    public function couldBeConstructedWithoutAnyArguments()
-    {
-        parent::couldBeConstructedWithoutAnyArguments();
-
-        $this->assertTrue(true);
-    }
-
-    /**
      * @return MockObject&GatewayInterface
      */
     protected function createGatewayMock()

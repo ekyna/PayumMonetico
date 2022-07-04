@@ -1,11 +1,11 @@
 {
-    "name" : "ekyna/payum-monetico",
-    "description" : "Payum Monetico (Credit Mutuel/CIC) gateway",
-    "type" : "component",
-    "authors" : [
+    "name": "ekyna/payum-monetico",
+    "description": "Payum Monetico (Credit Mutuel/CIC) gateway",
+    "type": "component",
+    "authors": [
         {
-            "name" : "Etienne Dauvergne",
-            "homepage" : "http://ekyna.com"
+            "name": "Etienne Dauvergne",
+            "homepage": "https://ekyna.com"
         }
     ],
     "keywords": [
@@ -15,28 +15,23 @@
         "credit mutuel",
         "cic"
     ],
-    "homepage" : "https://github.com/ekyna/PayumMonetico",
-    "license" : "MIT",
-    "require" : {
-        "php" : "^7.1|^8.0",
+    "homepage": "https://github.com/ekyna/PayumMonetico",
+    "license": "MIT",
+    "require": {
+        "php": "^7.2|^8.0",
         "ext-json": "*",
         "payum/core": "^1.5",
-        "psr/log": "~1.0|~2.0",
-        "symfony/options-resolver": "~3.0|~4.0|~5.0",
-        "sokil/php-isocodes": "~2.0|~3.0"
+        "psr/log": "^1.0|^2.0",
+        "symfony/options-resolver": "^3.4|^4.4|^5.2",
+        "sokil/php-isocodes": "^2.0|^3.0"
     },
     "require-dev": {
         "php-http/guzzle6-adapter": "^1.1|^2.0",
-        "phpunit/phpunit": "^7|^8|^9"
+        "phpunit/phpunit": "^7.0|^8.0|^9.0"
     },
-    "autoload" : {
-        "psr-4" : {
-            "Ekyna\\Component\\Payum\\Monetico\\" : "src/"
-        }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.5.x-dev"
+    "autoload": {
+        "psr-4": {
+            "Ekyna\\Component\\Payum\\Monetico\\": "src/"
         }
     }
 }
