@@ -15,8 +15,19 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: [7.3, 7.4, 8.0]
-                symfony: [^5.2, ^6.0]
+                php: [7.2, 7.3, 7.4, 8.0]
+                symfony: [^3.4, ^4.4, ^5.4, ^6.0]
+
+                exclude:
+                    -
+                        php: 7.2
+                        symfony: ^6.0
+                    -
+                        php: 7.3
+                        symfony: ^6.0
+                    -
+                        php: 7.4
+                        symfony: ^6.0
 
         env:
             APP_ENV: test
