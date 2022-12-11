@@ -34,7 +34,7 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
     /**
      * @inheritDoc
      */
-    public function setApi($api)
+    public function setApi($api): void
     {
         if (!$api instanceof Api) {
             throw new UnsupportedApiException('Not supported.');
@@ -46,7 +46,7 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
     /**
      * {@inheritDoc}
      */
-    public function setLogger(LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger): void
     {
         $this->logger = $logger;
     }
@@ -56,7 +56,7 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
      *
      * @param string $message
      */
-    protected function log($message)
+    protected function log(string $message): void
     {
         if (!$this->logger) {
             return;
@@ -67,12 +67,8 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
 
     /**
      * Logs the given message and data.
-     *
-     * @param string $message
-     * @param array  $data
-     * @param array  $filterKeys
      */
-    protected function logData($message, array $data, array $filterKeys = [])
+    protected function logData(string $message, array $data, array $filterKeys = []): void
     {
         if (!$this->logger) {
             return;
@@ -82,7 +78,7 @@ abstract class AbstractApiAction implements ActionInterface, GatewayAwareInterfa
             $data = array_intersect_key($data, array_flip($filterKeys));
         }
 
-        $data = array_map(function ($key, $value) {
+        $data = array_map(static function ($key, $value) {
             return "$key: $value";
         }, array_keys($data), $data);
 
