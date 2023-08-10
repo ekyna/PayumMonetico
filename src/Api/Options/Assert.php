@@ -47,7 +47,7 @@ class Assert
                 return false;
             }
 
-            $length = strlen($value);
+            $length = mb_strlen($value);
 
             return (1 <= $length) && ($length <= $max);
         };
