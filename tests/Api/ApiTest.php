@@ -173,4 +173,32 @@ hdGlvblZhbHVlIiA6ICJjbUp2ZDBJNFNIazNVVFJrWWtGU1EzRllZM1U9IgoJfQp9',
 
         return $api;
     }
+
+    public function test_create_payment_form_with_accents_in_address()
+    {
+        $api = $this->createApi();
+
+        $result = $api->createPaymentForm([
+            'date'        => '17/03/2018:10:40:10',
+            'amount'      => '24.80',
+            'currency'    => 'EUR',
+            'reference'   => '100008783',
+            'comment'     => 'Commande 100008783',
+            'locale'      => 'FR',
+            'email'       => 'test@example.org',
+            'success_url' => 'http://example.org',
+            'failure_url' => 'http://example.org',
+            'context'     => [
+                'billing' => [
+                    'addressLine1'    => '2 avenue de la botte aux bailles, Bâtiment Pasaïa',
+                    'city'            => 'some city',
+                    'postalCode'      => '12345',
+                    'country'         => 'US',
+                    'stateOrProvince' => 'US-CA',
+                ],
+            ],
+        ]);
+
+        $this->assertIsArray($result);
+    }
 }
