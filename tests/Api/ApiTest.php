@@ -190,7 +190,7 @@ hdGlvblZhbHVlIiA6ICJjbUp2ZDBJNFNIazNVVFJrWWtGU1EzRllZM1U9IgoJfQp9',
             'failure_url' => 'http://example.org',
             'context'     => [
                 'billing' => [
-                    'addressLine1'    => '2 avenue de la botte aux bailles, Bâtiment Pasaïa',
+                    'addressLine1'    => 'ïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïïï',
                     'city'            => 'some city',
                     'postalCode'      => '12345',
                     'country'         => 'US',
